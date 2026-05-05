@@ -10,4 +10,7 @@ export const CONFIG = {
         port: process.env.PORT || 3000
     },
     jwt_key: process.env.JWT_KEY || 'secreto de su firmador de tokens',
+
+
+    Frank Erick Joel Diaz Albarracin
 }
