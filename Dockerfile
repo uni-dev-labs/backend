@@ -19,6 +19,17 @@ RUN npm install
 # (se hace al final para aprovechar el caché de las capas anteriores)
 COPY . .
 
+# PASO 4: Generar config.ts a partir de variables de entorno
+# El archivo no está en el repositorio (es sensible), se construye aquí
+RUN printf 'export const CONFIG = {\n\
+    db: process.env.DB_CONNECTION || "mongodb://localhost:27017/miapp",\n\
+    db_test: process.env.DB_CONNECTION_TEST || "mongodb://localhost:27017/miapp_test",\n\
+    app: {\n\
+        port: process.env.PORT || 3000\n\
+    },\n\
+    jwt_key: process.env.JWT_KEY || "changeme",\n\
+};\n' > src/config.ts
+
 # Documentar el puerto que usa la app
 EXPOSE 3000
 
